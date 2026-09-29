@@ -13,9 +13,9 @@ cv2.imshow("Egalisee", img_equal)
 histo_img = cv2.calcHist([img_gray],[0],None,[256],[0,256])
 histo_equal_img = cv2.calcHist([img_equal],[0],None,[256],[0,256])
 
-plt.plot(histo_img)
-plt.xlim([0,256])
-plt.plot(histo_equal_img)
-plt.xlim([0,256])
+plt.plot(histo_img, label="Original")
+plt.plot(histo_equal_img, label="Egalisee")
+plt.xlim([0, 256])
+plt.legend()
 plt.show()
 

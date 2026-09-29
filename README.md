@@ -14,3 +14,11 @@ L'image `peppers-512.png` est convertie en niveaux de gris avant le calcul de so
 L'axe horizontal représente les niveaux de gris, de 0 (noir) à 255 (blanc), et l'axe vertical représente le nombre de pixels pour chaque niveau. L'histogramme présente principalement deux zones de concentration, autour des niveaux 80 et 180, ce qui indique que l'image contient beaucoup de pixels de luminosité sombre à moyenne et claire. Les faibles valeurs aux extrémités montrent qu'il y a peu de pixels complètement noirs ou complètement blancs.
 
 ### 2.2 - Égalisation de l’histogramme
+
+![L'image original](imagesDeTest/peppers-512.png)
+
+![L'image égalisée](screen/peppers-512-equal.png)
+
+![Histogramme de l'image originale et de l'image égalisée](screen/Figure_2.png)
+
+### 2.3 Modification de la luminosité et du contraste

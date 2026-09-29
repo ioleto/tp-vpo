@@ -116,3 +116,18 @@ Non. Les nouveaux pixels sont calculés uniquement à partir des pixels existant
 La quantification réduit le nombre de niveaux de gris disponibles. À mesure que le nombre de niveaux diminue, l'image devient plus plate et l'histogramme se concentre sur moins de valeurs. La perte de détail est visible dès 4 niveaux, puis devient très marquée à 2 niveaux.
 
 ### 4.2 - Application de LUT colorées
+
+### Comparaison des images
+
+L'image originale en niveaux de gris et les quatre representations obtenues avec `cv2.applyColorMap` sont comparees ci-dessous.
+
+| Image en niveaux de gris | LUT JET | LUT HOT | LUT OCEAN | LUT PINK |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Image originale](screen/peppers-512-original.png) | ![LUT JET](screen/peppers-512-lut-jet.png) | ![LUT HOT](screen/peppers-512-lut-hot.png) | ![LUT OCEAN](screen/peppers-512-lut-ocean.png) | ![LUT PINK](screen/peppers-512-lut-pink.png) |
+
+- `JET` va du bleu aux faibles intensites, puis au vert, au jaune et au rouge aux fortes intensites. Elle accentue fortement les contrastes, mais peut creer des frontieres visuelles artificielles.
+- `HOT` va du noir au rouge, puis au jaune et au blanc. Elle met bien en evidence les fortes intensites et conserve une lecture intuitive des zones sombres.
+- `OCEAN` privilegie les tons sombres, bleus et verts. Elle met bien en evidence les faibles intensites, mais differencie moins les niveaux eleves.
+- `PINK` produit une progression douce vers des tons clairs et roses. Elle est lisible, mais moins contrastee chromatiquement que `JET`.
+
+Pour cette image, `HOT` semble la LUT la plus adaptee : elle met clairement en evidence les zones lumineuses tout en conservant une progression lisible depuis les regions sombres. `JET` est plus contrastee, mais peut exagerer certaines transitions.

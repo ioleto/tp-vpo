@@ -15,7 +15,6 @@ histo_equal_img = cv2.calcHist([img_equal],[0],None,[256],[0,256])
 
 plt.plot(histo_img)
 plt.xlim([0,256])
-plt.show()
 plt.plot(histo_equal_img)
 plt.xlim([0,256])
 plt.show()

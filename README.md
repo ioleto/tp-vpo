@@ -22,3 +22,17 @@ L'axe horizontal représente les niveaux de gris, de 0 (noir) à 255 (blanc), et
 ![Histogramme de l'image originale et de l'image égalisée](screen/Figure_2.png)
 
 ### 2.3 Modification de la luminosité et du contraste
+
+![L'image original](imagesDeTest/peppers-512.png)
+
+alpha=1 et beta=40 
+
+![L'image contrastée](screen/peppers-512-contrast.png)
+
+![Histogramme de l'image originale et de l'image contrastée](screen/Figure_3.png)
+
+alpha=1.5 et beta=0.
+
+![L'image contrastée](screen/peppers-512-contrast2.png)
+
+![Histogramme de l'image originale et de l'image contrastée](screen/Figure_4.png)

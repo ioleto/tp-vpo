@@ -10,6 +10,9 @@ resultat = cv2.convertScaleAbs(img_color, alpha=1, beta=40)
 cv2.imshow("Couleur", img_color)
 cv2.imshow("Contrastée", resultat)
 
+# Sauvegarder l'image resultat
+cv2.imwrite('screen/peppers-512-contrast.png', resultat)
+
 histo_img = cv2.calcHist([img_color],[0],None,[256],[0,256])
 histo_equal_img = cv2.calcHist([resultat],[0],None,[256],[0,256])
 

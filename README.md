@@ -105,3 +105,14 @@ Non. Les nouveaux pixels sont calculés uniquement à partir des pixels existant
 
 ### 4.1 - Quantification des niveaux de gris
 
+| Nombre de niveaux | Image quantifiée | Histogramme |
+|:---:|:---:|:---:|
+| 256 (original) | ![Image originale](imagesDeTest/peppers-512.png) | ![Histogramme original](screen/Figure_1.png) |
+| 64 | ![64 niveaux](screen/peppers-512-quantifiee-64.png) | ![Histogramme 64 niveaux](screen/Figure_5.png) |
+| 16 | ![16 niveaux](screen/peppers-512-quantifiee-16.png) | ![Histogramme 16 niveaux](screen/Figure_6.png) |
+| 4 | ![4 niveaux](screen/peppers-512-quantifiee-4.png) | ![Histogramme 4 niveaux](screen/Figure_7.png) |
+| 2 | ![2 niveaux](screen/peppers-512-quantifiee-2.png) | ![Histogramme 2 niveaux](screen/Figure_8.png) |
+
+La quantification réduit le nombre de niveaux de gris disponibles. À mesure que le nombre de niveaux diminue, l'image devient plus plate et l'histogramme se concentre sur moins de valeurs. La perte de détail est visible dès 4 niveaux, puis devient très marquée à 2 niveaux.
+
+### 4.2 - Application de LUT colorées

@@ -24,6 +24,11 @@ print(f"Forme au début : {img_gray.shape}, ensuite : {img_echantillonage.shape}
 img_echantillonage2 = cv2.resize(img_gray, (64, 64), interpolation=cv2.INTER_NEAREST)
 img_echantillonage3 = cv2.resize(img_gray, (64, 64), interpolation=cv2.INTER_AREA)
 
+cv2.imwrite('screen/sous-echant_base.png', img_gray)
+cv2.imwrite('screen/sous-echant_1.png', img_echantillonage)
+cv2.imwrite('screen/sous-echant_2.png', img_echantillonage2)
+cv2.imwrite('screen/sous-echant_3.png', img_echantillonage3)
+
 cv2.imshow("Boucle", img_echantillonage)
 cv2.imshow("Inter_Nearest", img_echantillonage2)
 cv2.imshow("Inter_Area", img_echantillonage3)

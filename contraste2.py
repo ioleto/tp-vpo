@@ -5,7 +5,8 @@ from matplotlib import pyplot as plt
 
 img_color = cv2.imread('imagesDeTest/peppers-512.png', cv2.IMREAD_COLOR)
 
-resultat = cv2.convertScaleAbs(img_color, alpha=1, beta=40)
+
+resultat = cv2.convertScaleAbs(img_color, alpha=1.5, beta=0)
 
 cv2.imshow("Couleur", img_color)
 cv2.imshow("Contrastée", resultat)

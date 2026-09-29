@@ -7,13 +7,15 @@ print(f"Forme (gris) : {img_gray.shape}, Type : {img_gray.dtype}")
 
 img_equal = cv2.equalizeHist(img_gray)
 
-cv2.imshow("Fenetre", img_gray) 
-cv2.imshow("Fenetre", img_equal) 
+cv2.imshow("Fenetre", img_gray, img_equal) 
 
 histo_img = cv2.calcHist([img_gray],[0],None,[256],[0,256])
-histo__equal_img = cv2.calcHist([img_equal],[0],None,[256],[0,256])
+histo_equal_img = cv2.calcHist([img_equal],[0],None,[256],[0,256])
 
 plt.plot(histo_img)
+plt.xlim([0,256])
+plt.show()
+plt.plot(histo_equal_img)
 plt.xlim([0,256])
 plt.show()
 

@@ -7,7 +7,8 @@ print(f"Forme (gris) : {img_gray.shape}, Type : {img_gray.dtype}")
 
 img_equal = cv2.equalizeHist(img_gray)
 
-cv2.imshow("Fenetre", img_gray, img_equal) 
+cv2.imshow("Gris", img_gray)
+cv2.imshow("Egalisee", img_equal)
 
 histo_img = cv2.calcHist([img_gray],[0],None,[256],[0,256])
 histo_equal_img = cv2.calcHist([img_equal],[0],None,[256],[0,256])

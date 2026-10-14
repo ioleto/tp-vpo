@@ -1,6 +1,6 @@
-# TP1
+# TP 1 - traitement d’images - partie 1
 
-Eloi Tourangin et Thomas Verron
+Eloi Tourangin et Thomas Verron\
 SEC3
 
 ## 2 - Histogramme
@@ -154,7 +154,7 @@ Le canal vert contribue le plus à la luminosité obtenue, car il a le coefficie
 
 Une région où le résultat en niveaux de gris diffère nettement du plan vert est la zone des poivrons rouges. Dans cette région, le plan vert est relativement sombre, car les poivrons rouges ont peu de composante verte. Cependant, le plan rouge est très lumineux. Ainsi, même si le plan vert est sombre, la forte contribution du canal rouge fait que cette zone apparaît plus claire en niveaux de gris.
 
-### 5 - Rotation
+## 5 - Rotation
 
 L'image `squares.tif` est tournée autour de son centre avec
 `cv2.getRotationMatrix2D` et `cv2.warpAffine`. Les dimensions de sortie restent identiques à celles de l'image originale et l'interpolation utilisée est `cv2.INTER_NEAREST`.
@@ -167,7 +167,7 @@ Les six résultats sont regroupés dans la figure comparative suivante. Chaque c
 
 L'interpolation bilinéaire calcule la valeur d'un pixel à partir de ses voisins. Elle produit donc des contours plus lisses que l'interpolation au plus proche voisin, mais chaque rotation successive provoque également une perte progressive de netteté.
 
-#### Interprétation des résultats
+### Interprétation des résultats
 
 **Question 1 :** Les trois procédures conduisent-elles exactement au même résultat alors que l’angle total est toujours de 90◦? Expliquez les différences observées
 
@@ -185,3 +185,12 @@ Avec `INTER_NEAREST`, les contours sont souvent en escaliers ou en petits blocs.
 **Question 4 :** Observez les bords de l’image après rotation. Quelle information peut être perdue lorsque les dimensions de l’image de sortie restent inchangées ?
 
 Les dimensions de l'image ne changent pas. Une partie de l'image peut donc sortir du cadre et être coupée. Des zones noires peuvent aussi apparaître dans les parties qui n'étaient pas couvertes par l'image de départ. Ces zones ne contiennent aucune information de l'image originale.
+
+# TP 1 - traitement d’images - partie 2
+
+Eloi Tourangin et Thomas Verron\
+SEC3
+
+## 1 - Convolution
+
+## 2 - Morphologie Mathématique

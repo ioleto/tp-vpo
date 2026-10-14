@@ -117,7 +117,7 @@ La quantification réduit le nombre de niveaux de gris disponibles. À mesure qu
 
 ### 4.2 - Application de LUT colorées
 
-### Comparaison des images
+#### Comparaison des images
 
 L'image originale en niveaux de gris et les quatre representations obtenues avec `cv2.applyColorMap` sont comparees ci-dessous.
 
@@ -131,3 +131,28 @@ L'image originale en niveaux de gris et les quatre representations obtenues avec
 - `PINK` produit une progression douce vers des tons clairs et roses. Elle est lisible, mais moins contrastee chromatiquement que `JET`.
 
 Pour cette image, `HOT` semble la LUT la plus adaptee : elle met clairement en evidence les zones lumineuses tout en conservant une progression lisible depuis les regions sombres. `JET` est plus contrastee, mais peut exagerer certaines transitions.
+
+### 4.3 - Séparation des plans de couleur
+
+#### Figure comparative
+
+L'image couleur originale, les trois plans de couleur et l'image convertie en niveaux de gris sont présentées ci-dessous. OpenCV lit l'image dans l'ordre BGR ; chaque canal est donc extrait avec `b, g, r = cv2.split(image)`.
+
+| Image couleur originale | Plan bleu | Plan vert | Plan rouge | Niveaux de gris |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Image couleur originale](imagesDeTest/peppers-512-RGB.png) | ![Plan bleu](screen/peppers-512-RGB-canal-bleu.png) | ![Plan vert](screen/peppers-512-RGB-canal-vert.png) | ![Plan rouge](screen/peppers-512-RGB-canal-rouge.png) | ![Image en niveaux de gris](screen/peppers-512-RGB-gris.png) |
+
+**Question 1 :** Comment la couleur des différentes régions de l’image influence-t-elle leur intensité dans les plans rouge, vert et bleu ?
+
+Elle dépend de la couleur de chaque région. Par exemple, les zones rouges apparaissent plus claires dans le plan rouge et plus sombres dans les plans vert et bleu. etc...
+
+**Question 2 :** D’après les coefficients utilisés pour la conversion en niveaux de gris, quel canal contribue le plus à la luminosité obtenue et quel canal contribue le moins ?
+
+Le canal vert contribue le plus à la luminosité obtenue, car il a le coefficient le plus élevé (0.587). Le canal bleu contribue le moins, avec le coefficient le plus faible (0.114). Le canal rouge a un coefficient intermédiaire (0.299).
+
+**Question 3 :** Identifiez dans l’image une région où le résultat en niveaux de gris diffère nettement du plan vert. Expliquez cette différence à partir des valeurs des autres canaux.
+
+Une région où le résultat en niveaux de gris diffère nettement du plan vert est la zone des poivrons rouges. Dans cette région, le plan vert est relativement sombre, car les poivrons rouges ont peu de composante verte. Cependant, le plan rouge est très lumineux. Ainsi, même si le plan vert est sombre, la forte contribution du canal rouge fait que cette zone apparaît plus claire en niveaux de gris.
+
+### 5 - Rotation
+

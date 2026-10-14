@@ -169,28 +169,19 @@ L'interpolation bilinéaire calcule la valeur d'un pixel à partir de ses voisin
 
 #### Interprétation des résultats
 
-**1. Les trois procédures donnent-elles exactement le même résultat ?**
+**Question 1 :** Les trois procédures conduisent-elles exactement au même résultat alors que l’angle total est toujours de 90◦? Expliquez les différences observées
 
-Non. Les trois procédures ont le même angle total de 90°, mais les deux
-dernières font plusieurs rotations. À chaque étape, l'image est recalculée.
-Les petites erreurs sont donc reprises à l'étape suivante. Les résultats sont
-ainsi différents.
+Non. Les trois procédures ont le même angle total de 90°, mais les deux dernières font plusieurs rotations. À chaque étape, l'image est recalculée. Les petites erreurs sont donc reprises à l'étape suivante. Les résultats sont ainsi différents.
 
-**2. Effet du nombre de rotations successives sur la qualité**
+**Question 2 :** Quel effet le nombre de rotations successives produit-il sur la qualité de l’image ?
 
 Plus il y a de rotations, plus l'image est recalculée. Les erreurs
-s'accumulent, les détails disparaissent et l'image devient moins nette. Les
-six rotations donnent donc généralement le moins bon résultat.
+s'accumulent, les détails disparaissent et l'image devient moins nette. Les six rotations donnent donc généralement le moins bon résultat.
 
-**3. Comparaison des défauts des deux interpolations**
+**Question 3 :** Comparez les défauts produits par l’interpolation au plus proche voisin et par l’interpolation bilinéaire.
 
-Avec `INTER_NEAREST`, les contours sont souvent en escaliers ou en petits
-blocs. Avec `INTER_LINEAR`, les contours sont plus lisses, mais l'image devient
-plus floue. Ce flou augmente avec les rotations successives.
+Avec `INTER_NEAREST`, les contours sont souvent en escaliers ou en petits blocs. Avec `INTER_LINEAR`, les contours sont plus lisses, mais l'image devient plus floue. Ce flou augmente avec les rotations successives.
 
-**4. Informations perdues sur les bords**
+**Question 4 :** Observez les bords de l’image après rotation. Quelle information peut être perdue lorsque les dimensions de l’image de sortie restent inchangées ?
 
-Les dimensions de l'image ne changent pas. Une partie de l'image peut donc
-sortir du cadre et être coupée. Des zones noires peuvent aussi apparaître dans
-les parties qui n'étaient pas couvertes par l'image de départ. Ces zones ne
-contiennent aucune information de l'image originale.
+Les dimensions de l'image ne changent pas. Une partie de l'image peut donc sortir du cadre et être coupée. Des zones noires peuvent aussi apparaître dans les parties qui n'étaient pas couvertes par l'image de départ. Ces zones ne contiennent aucune information de l'image originale.

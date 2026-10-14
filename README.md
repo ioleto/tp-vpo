@@ -156,3 +156,41 @@ Une région où le résultat en niveaux de gris diffère nettement du plan vert 
 
 ### 5 - Rotation
 
+L'image `squares.tif` est tournée autour de son centre avec
+`cv2.getRotationMatrix2D` et `cv2.warpAffine`. Les dimensions de sortie restent identiques à celles de l'image originale et l'interpolation utilisée est `cv2.INTER_NEAREST`.
+
+Les trois expériences sont recommencées avec `cv2.INTER_LINEAR`.
+
+Les six résultats sont regroupés dans la figure comparative suivante. Chaque colonne correspond à une procédure dont l'angle total vaut 90° ; la première ligne utilise l'interpolation au plus proche voisin et la seconde l'interpolation bilinéaire.
+
+![Comparaison des six rotations](screen/rotation-comparaison.png)
+
+L'interpolation bilinéaire calcule la valeur d'un pixel à partir de ses voisins. Elle produit donc des contours plus lisses que l'interpolation au plus proche voisin, mais chaque rotation successive provoque également une perte progressive de netteté.
+
+#### Interprétation des résultats
+
+**1. Les trois procédures donnent-elles exactement le même résultat ?**
+
+Non. Les trois procédures ont le même angle total de 90°, mais les deux
+dernières font plusieurs rotations. À chaque étape, l'image est recalculée.
+Les petites erreurs sont donc reprises à l'étape suivante. Les résultats sont
+ainsi différents.
+
+**2. Effet du nombre de rotations successives sur la qualité**
+
+Plus il y a de rotations, plus l'image est recalculée. Les erreurs
+s'accumulent, les détails disparaissent et l'image devient moins nette. Les
+six rotations donnent donc généralement le moins bon résultat.
+
+**3. Comparaison des défauts des deux interpolations**
+
+Avec `INTER_NEAREST`, les contours sont souvent en escaliers ou en petits
+blocs. Avec `INTER_LINEAR`, les contours sont plus lisses, mais l'image devient
+plus floue. Ce flou augmente avec les rotations successives.
+
+**4. Informations perdues sur les bords**
+
+Les dimensions de l'image ne changent pas. Une partie de l'image peut donc
+sortir du cadre et être coupée. Des zones noires peuvent aussi apparaître dans
+les parties qui n'étaient pas couvertes par l'image de départ. Ces zones ne
+contiennent aucune information de l'image originale.

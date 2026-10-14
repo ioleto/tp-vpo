@@ -188,9 +188,61 @@ Les dimensions de l'image ne changent pas. Une partie de l'image peut donc sorti
 
 # TP 1 - traitement d’images - partie 2
 
-Eloi Tourangin et Thomas Verron\
-SEC3
-
 ## 1 - Convolution
 
-## 2 - Morphologie Mathématique
+### 1.1 - Application de filtres de convolution
+
+L'image `peppers-512.png` est chargée en niveaux de gris. Les six noyaux sont appliqués avec `cv2.filter2D`, via une fonction commune :
+
+```python
+def apply_kernel(img, kernel):
+    return cv2.filter2D(img.astype(np.float32), cv2.CV_32F, kernel)
+```
+
+Les calculs sont faits en `float32` pour conserver les valeurs négatives.
+
+| Original | K1 | K2 | K3 |
+|:---:|:---:|:---:|:---:|
+| ![Original](screen/conv_base.png) | ![K1](screen/conv_k1.png) | ![K2](screen/conv_k2.png) | ![K3](screen/conv_k3.png) |
+
+| K4 | K5 | K6 |
+|:---:|:---:|:---:|
+| ![K4](screen/conv_k4.png) | ![K5](screen/conv_k5.png) | ![K6](screen/conv_k6.png) |
+
+K1 à K3 sont limités à [0,255] (`np.clip`). K4 à K6 sont affichés en valeur absolue normalisée (`cv2.normalize`).
+
+Avant de lancer le programme, on a classé les noyaux en regardant leurs coefficients. K1 et K2 n'ont que des coefficients positifs dont la somme vaut 1 : ce sont des moyennes, donc des lissages. K3 a un centre très fort entouré de valeurs négatives, avec une somme de 1 : il devrait renforcer les détails tout en gardant l'image. K4, K5 et K6 ont une somme nulle avec des coefficients positifs et négatifs : ils calculent des différences, donc détectent des contours. Les résultats obtenus confirment ces prévisions.
+
+| Noyau | Somme des coefficients | Effet prévu | Effet observé |
+|:---:|:---:|:---:|:---|
+| K1 | 1 | Lissage | Image légèrement floue |
+| K2 | 1 | Lissage | Image floue, un peu plus que K1 |
+| K3 | 1 | Renforcement des détails | Contours accentués, bruit amplifié |
+| K4 | 0 | Détection de contours | Contours verticaux |
+| K5 | 0 | Détection de contours | Contours diagonaux |
+| K6 | 0 | Détection de contours | Contours fins dans toutes les directions |
+
+**Question 1 :** Quel lien observez-vous entre la somme des coefficients d’un noyau et son effet dans
+les régions où l’intensité est constante ?
+
+Avec une somme de 1, les zones uniformes restent inchangées. Avec une somme de 0, elles deviennent noires : il ne reste que les contours.
+
+**Question 2 :** Les noyaux K1 et K2 réalisent tous les deux un lissage. Quelle différence observezvous entre leurs résultats ?
+
+K2 floute un peu plus que K1. K2 donne le même poids aux 9 pixels, alors que K1 donne plus de poids au pixel central, donc il préserve mieux les contours.
+
+**Question 3 :** Quel noyau renforce les détails sans supprimer complètement l'image originale ?
+
+K3. Sa somme vaut 1, donc l'image est conservée, et son centre fort (9) entouré de valeurs négatives (-3) accentue les différences entre un pixel et ses voisins.
+
+**Question 4 :** Parmi les noyaux proposés, lesquels détectent principalement des contours ? Comparez les orientations des contours mises en évidence.
+
+K4, K5 et K6. K4 (Sobel) détecte les contours verticaux, K5 les contours diagonaux, et K6 (laplacien) les contours dans toutes les directions.
+
+**Question 5 :** Quelle méthode avez-vous utilisée pour représenter les résultats comportant des valeurs négatives ?
+
+On calcule en `float32`, puis on affiche la valeur absolue normalisée entre 0 et 255. Les contours apparaissent en blanc, quel que soit le sens de la transition.
+
+**Question 6 :** Pourquoi un résultat codé directement avec des entiers non signés sur 8 bits peut-il être incorrect ou incomplet ?
+
+Un `uint8` ne va que de 0 à 255. Les valeurs négatives sont ramenées à 0, donc on perd un sens de contour sur deux.
